@@ -5,7 +5,7 @@
 
 import math
 
-import matplotlib.cm as cm
+import matplotlib
 import numpy as np
 import open3d as o3d
 import skimage.measure
@@ -320,7 +320,7 @@ class Mesher:
 
         sdf_pred_show = np.clip((sdf_pred - min_sdf) / (max_sdf - min_sdf), 0.0, 1.0)
 
-        color_map = cm.get_cmap(cmap)  # or 'jet'
+        color_map = matplotlib.colormaps[cmap]  # or 'jet'
         colors = color_map(1.0 - sdf_pred_show)[:, :3].astype(np.float64) # change to blue (+) --> red (-)
 
         sdf_map_pc = o3d.geometry.PointCloud()

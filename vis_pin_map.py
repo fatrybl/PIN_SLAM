@@ -84,7 +84,7 @@ def vis_pin_map(
     neural_points: NeuralPoints = NeuralPoints(config)
 
     # Load the map
-    loaded_model = torch.load(config.model_path)
+    loaded_model = torch.load(config.model_path, weights_only=False)
     neural_points = loaded_model["neural_points"]
     load_decoders(loaded_model, mlp_dict) 
     neural_points.temporal_local_map_on = False

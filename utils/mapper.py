@@ -6,7 +6,7 @@
 import math
 import sys
 
-import matplotlib.cm as cm
+import matplotlib
 import numpy as np
 import open3d as o3d
 import torch
@@ -579,7 +579,7 @@ class Mapper:
             (pool_label_np - min_sdf) / (max_sdf - min_sdf), 0.0, 1.0
         )
 
-        color_map = cm.get_cmap("seismic")
+        color_map = matplotlib.colormaps["seismic"]
         colors = color_map(1.0 - pool_label_np)[:, :3].astype(np.float64) # change to blue (+) ---> red (-)
 
         data_pool_pc_o3d.colors = o3d.utility.Vector3dVector(colors)

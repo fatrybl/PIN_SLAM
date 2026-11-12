@@ -12,7 +12,7 @@ from datetime import datetime
 import cv2
 import torch
 import os
-import matplotlib.cm as cm
+import matplotlib
 import numpy as np
 import copy
 import open3d as o3d
@@ -902,7 +902,7 @@ class SLAM_GUI:
                 z_values = np.array(self.mesh.vertices, dtype=np.float64)[:, 2]
                 z_min, z_max = z_values.min(), z_values.max()
                 z_normalized = (z_values - z_min) / (z_max - z_min + 1e-6)
-                color_map = cm.get_cmap("jet")
+                color_map = matplotlib.colormaps["jet"]
                 mesh_verts_colors_np = color_map(z_normalized)[:, :3].astype(np.float64)
                 self.mesh.vertex_colors = o3d.utility.Vector3dVector(mesh_verts_colors_np)
 
@@ -984,13 +984,13 @@ class SLAM_GUI:
                     ts_np = (data_packet.neural_points_data["ts"])
                 ts_np = ts_np[::neural_point_vis_down_rate].detach().cpu().numpy()
                 ts_np = ts_np / ts_np.max()
-                color_map = cm.get_cmap("jet")
+                color_map = matplotlib.colormaps["jet"]
                 neural_point_colors_np = color_map(ts_np)[:, :3].astype(np.float64)
             elif self.neuralpoint_height_chbox.checked:
                 z_values = neural_point_position_np[:, 2]
                 z_min, z_max = z_values.min(), z_values.max()
                 z_normalized = (z_values - z_min) / (z_max - z_min + 1e-6)
-                color_map = cm.get_cmap("jet")
+                color_map = matplotlib.colormaps["jet"]
                 neural_point_colors_np = color_map(z_normalized)[:, :3].astype(np.float64)
                 
             self.neural_points.points = o3d.utility.Vector3dVector(neural_point_position_np)
@@ -1027,7 +1027,7 @@ class SLAM_GUI:
                 z_values = data_packet.current_pointcloud_xyz[:, 2]
                 z_min, z_max = z_values.min(), z_values.max()
                 z_normalized = (z_values - z_min) / (z_max - z_min + 1e-6)
-                color_map = cm.get_cmap("jet")
+                color_map = matplotlib.colormaps["jet"]
                 scan_colors_np = color_map(z_normalized)[:, :3].astype(np.float64)
                 self.scan.colors = o3d.utility.Vector3dVector(scan_colors_np)
 

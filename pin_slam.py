@@ -155,7 +155,7 @@ def run_pin_slam(
     # Load the decoder model
     # for the localization with pre-built map mode, set load_model as True and provide the model path in the config file
     if config.load_model:
-        loaded_model = torch.load(config.model_path)
+        loaded_model = torch.load(config.model_path, weights_only=False)
         neural_points = loaded_model["neural_points"]
         neural_points.config = config
         load_decoders(loaded_model, mlp_dict) 

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import List
 
 import datetime as dt
-import matplotlib.cm as cm
+import matplotlib
 import numpy as np
 import open3d as o3d
 import torch
@@ -1305,7 +1305,7 @@ def write_traj_as_o3d(poses_np, path):
     o3d_pcd.points = o3d.utility.Vector3dVector(poses_np[:, :3, 3])
 
     ts_np = np.linspace(0, 1, poses_np.shape[0])
-    color_map = cm.get_cmap("jet")
+    color_map = matplotlib.colormaps["jet"]
     ts_color = color_map(ts_np)[:, :3].astype(np.float64)
     o3d_pcd.colors = o3d.utility.Vector3dVector(ts_color)
 

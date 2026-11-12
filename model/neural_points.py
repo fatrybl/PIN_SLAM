@@ -5,7 +5,7 @@
 
 import sys
 
-import matplotlib.cm as cm
+import matplotlib
 import numpy as np
 import open3d as o3d
 import torch
@@ -271,7 +271,7 @@ class NeuralPoints(nn.Module):
                     .astype(np.float64)
                 )
             ts_np = np.clip(ts_np / self.max_ts, 0.0, 1.0)
-            color_map = cm.get_cmap("jet")
+            color_map = matplotlib.colormaps["jet"]
             ts_color = color_map(ts_np)[:, :3].astype(np.float64)
             neural_pc_o3d.colors = o3d.utility.Vector3dVector(ts_color)
 

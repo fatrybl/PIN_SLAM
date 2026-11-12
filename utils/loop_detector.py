@@ -363,7 +363,7 @@ class NeuralPointMapContextManager:
 
     def load_context_dict(self, dict_path):
 
-        loaded_dict = torch.load(dict_path)
+        loaded_dict = torch.load(dict_path, weights_only=False)
         self.contexts = loaded_dict["contexts"]
         self.ringkeys = loaded_dict["ringkeys"]
         
